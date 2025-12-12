@@ -2,7 +2,7 @@
 
 const table = document.querySelector('table');
 const tBody = table.querySelector('tbody');
-const tBodyRows = [...tBody.rows];
+const tBodyRows = tBody.rows;
 const tHead = table.querySelector('thead');
 const tRowHeaders = tHead.firstElementChild.cells;
 let newBodyRow;
@@ -195,6 +195,8 @@ form.addEventListener('submit', (ev) => {
   tdCreator(ageValue);
   tdCreator(nfSalaryValue);
 
+  tBody.append(newBodyRow);
+
   creatNotification('Success', 'success');
 });
 
@@ -204,7 +206,6 @@ function tdCreator(headName) {
   td.textContent = headName;
 
   newBodyRow.append(td);
-  tBody.append(newBodyRow);
 }
 
 function creatNotification(title, result) {
