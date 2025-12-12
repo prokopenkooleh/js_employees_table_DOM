@@ -18,7 +18,7 @@ let lastTbodyRowIndex = null;
   });
 });
 
-tBodyRows.forEach((row, index) => {
+[...tBodyRows].forEach((row, index) => {
   row.addEventListener('click', (ev) => {
     if (lastTbodyRowIndex !== null && lastTbodyRowIndex !== index) {
       tBodyRows[lastTbodyRowIndex].classList.remove('active');
