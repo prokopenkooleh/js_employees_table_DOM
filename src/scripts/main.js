@@ -18,12 +18,17 @@ let lastTbodyRowIndex = null;
   });
 });
 
-[...tBodyRows].forEach((row, index) => {
-  row.addEventListener('click', (ev) => {
-    if (lastTbodyRowIndex !== null && lastTbodyRowIndex !== index) {
-      tBodyRows[lastTbodyRowIndex].classList.remove('active');
-    }
+tBody.addEventListener('click', (ev) => {
+  const row = ev.target.closest('tr');
 
+  if (!row) {
+    return;
+  }
+
+  [...tBodyRows].forEach((r, index) => {
+    if (lastTbodyRowIndex !== null && lastTbodyRowIndex !== index) {
+      r[lastTbodyRowIndex].classList.remove('active');
+    }
     row.classList.toggle('active');
 
     lastTbodyRowIndex = index;
@@ -31,7 +36,7 @@ let lastTbodyRowIndex = null;
 });
 
 function sortRows(colIndex) {
-  const rows = [...tBody.rows];
+  const rows = tBody.rows;
 
   if (lastColumnIndex !== colIndex) {
     ascending = true;
@@ -40,7 +45,7 @@ function sortRows(colIndex) {
     ascending = !ascending;
   }
 
-  rows.sort((a, b) => {
+  [...rows].sort((a, b) => {
     const aText = a.cells[colIndex].textContent.trim();
     const bText = b.cells[colIndex].textContent.trim();
 
